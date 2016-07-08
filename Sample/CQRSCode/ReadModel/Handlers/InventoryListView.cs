@@ -11,18 +11,18 @@ namespace CQRSCode.ReadModel.Handlers
     {
         public void Handle(InventoryItemCreated message)
         {
-            InMemoryDatabase.List.Add(new InventoryItemListDto(message.Id, message.Name));
+            InMemoryDatabase.List.Add(new InventoryItemListDto(message.AggregateId, message.Name));
         }
 
         public void Handle(InventoryItemRenamed message)
         {
-            var item = InMemoryDatabase.List.Find(x => x.Id == message.Id);
+            var item = InMemoryDatabase.List.Find(x => x.Id == message.AggregateId);
             item.Name = message.NewName;
         }
 
         public void Handle(InventoryItemDeactivated message)
         {
-            InMemoryDatabase.List.RemoveAll(x => x.Id == message.Id);
+            InMemoryDatabase.List.RemoveAll(x => x.Id == message.AggregateId);
         }
     }
 }

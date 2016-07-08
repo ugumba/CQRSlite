@@ -14,12 +14,12 @@ namespace CQRSCode.ReadModel.Handlers
     {
         public void Handle(InventoryItemCreated message)
         {
-            InMemoryDatabase.Details.Add(message.Id, new InventoryItemDetailsDto(message.Id, message.Name, 0, message.Version));
+            InMemoryDatabase.Details.Add(message.AggregateId, new InventoryItemDetailsDto(message.AggregateId, message.Name, 0, message.Version));
         }
 
         public void Handle(InventoryItemRenamed message)
         {
-            InventoryItemDetailsDto d = GetDetailsItem(message.Id);
+            InventoryItemDetailsDto d = GetDetailsItem(message.AggregateId);
             d.Name = message.NewName;
             d.Version = message.Version;
         }
@@ -36,21 +36,21 @@ namespace CQRSCode.ReadModel.Handlers
 
         public void Handle(ItemsRemovedFromInventory message)
         {
-            var dto = GetDetailsItem(message.Id);
+            var dto = GetDetailsItem(message.AggregateId);
             dto.CurrentCount -= message.Count;
             dto.Version = message.Version;
         }
 
         public void Handle(ItemsCheckedInToInventory message)
         {
-            var dto = GetDetailsItem(message.Id);
+            var dto = GetDetailsItem(message.AggregateId);
             dto.CurrentCount += message.Count;
             dto.Version = message.Version;
         }
 
         public void Handle(InventoryItemDeactivated message)
         {
-            InMemoryDatabase.Details.Remove(message.Id);
+            InMemoryDatabase.Details.Remove(message.AggregateId);
         }
     }
 }

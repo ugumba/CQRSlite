@@ -9,11 +9,11 @@ namespace CQRSCode.ReadModel.Events
  
         public InventoryItemRenamed(Guid id, string newName)
         {
-            Id = id;
+            AggregateId = id;
             NewName = newName;
         }
 
-        public Guid Id { get; set; }
+        public Guid AggregateId { get; set; }
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
     }

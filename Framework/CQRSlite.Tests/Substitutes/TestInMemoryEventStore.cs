@@ -21,7 +21,7 @@ namespace CQRSlite.Tests.Substitutes
         {
             lock(Events)
             {
-                return Events.Where(x => x.Version > fromVersion && x.Id == aggregateId).OrderBy(x => x.Version).ToList();
+                return Events.Where(x => x.Version > fromVersion && x.AggregateId == aggregateId).OrderBy(x => x.Version).ToList();
             }
         }
     }

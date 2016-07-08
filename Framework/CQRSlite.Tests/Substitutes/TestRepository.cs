@@ -19,7 +19,7 @@ namespace CQRSlite.Tests.Substitutes
         public T Get<T>(Guid aggregateId) where T : AggregateRoot
         {
             var obj = (T) Activator.CreateInstance(typeof (T), true);
-            obj.LoadFromHistory(new[] {new TestAggregateDidSomething {Id = aggregateId, Version = 1}});
+            obj.LoadFromHistory(new[] {new TestAggregateDidSomething {AggregateId = aggregateId, Version = 1}});
             return obj;
         }
     }

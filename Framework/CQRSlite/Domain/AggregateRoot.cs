@@ -29,13 +29,13 @@ namespace CQRSlite.Domain
                 var i = 0;
                 foreach (var @event in changes)
                 {
-                    if (@event.Id == Guid.Empty && Id == Guid.Empty)
+                    if (@event.AggregateId == Guid.Empty && Id == Guid.Empty)
                     {
                         throw new AggregateOrEventMissingIdException(GetType(), @event.GetType());
                     }
-                    if (@event.Id == Guid.Empty)
+                    if (@event.AggregateId == Guid.Empty)
                     {
-                        @event.Id = Id;
+                        @event.AggregateId = Id;
                     }
                     i++;
                     @event.Version = Version + i;
@@ -53,7 +53,7 @@ namespace CQRSlite.Domain
             {
                 if (e.Version != Version + 1)
                 {
-                    throw new EventsOutOfOrderException(e.Id);
+                    throw new EventsOutOfOrderException(e.AggregateId);
                 }
                 ApplyChange(e, false);
             }
@@ -75,7 +75,7 @@ namespace CQRSlite.Domain
                 }
                 else
                 {
-                    Id = @event.Id;
+                    Id = @event.AggregateId;
                     Version++;
                 }
             }

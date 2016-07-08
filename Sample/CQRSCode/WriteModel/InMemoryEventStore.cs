@@ -20,11 +20,11 @@ namespace CQRSCode.WriteModel
             foreach (var @event in events)
             {
                 List<IEvent> list;
-                _inMemoryDb.TryGetValue(@event.Id, out list);
+                _inMemoryDb.TryGetValue(@event.AggregateId, out list);
                 if (list == null)
                 {
                     list = new List<IEvent>();
-                    _inMemoryDb.Add(@event.Id, list);
+                    _inMemoryDb.Add(@event.AggregateId, list);
                 }
                 list.Add(@event);
                 _publisher.Publish(@event);

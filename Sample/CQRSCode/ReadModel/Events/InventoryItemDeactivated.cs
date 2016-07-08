@@ -7,10 +7,10 @@ namespace CQRSCode.ReadModel.Events
 	{
         public InventoryItemDeactivated(Guid id)
         {
-            Id = id;
+            AggregateId = id;
         }
 
-        public Guid Id { get; set; }
+        public Guid AggregateId { get; set; }
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
 	}

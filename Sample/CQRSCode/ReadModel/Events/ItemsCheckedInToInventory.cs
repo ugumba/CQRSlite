@@ -9,11 +9,11 @@ namespace CQRSCode.ReadModel.Events
  
         public ItemsCheckedInToInventory(Guid id, int count) 
         {
-            Id = id;
+            AggregateId = id;
             Count = count;
         }
 
-        public Guid Id { get; set; }
+        public Guid AggregateId { get; set; }
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
     }
